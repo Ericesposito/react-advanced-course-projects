@@ -12,7 +12,6 @@ export default function FindEventSection() {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['events', { search: searchTerm }],
     queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
-    staleTime: 5000,
   });
 
   function handleSubmit(event) {
@@ -37,7 +36,7 @@ export default function FindEventSection() {
 
   if (data) {
     content = (
-      <ul>
+      <ul className="events-list">
         {data.map((event) => {
           <li key={event.id}>
             <EventItem event={event} />
@@ -46,6 +45,11 @@ export default function FindEventSection() {
       </ul>
     );
   }
+
+  console.log('data: ', data);
+  console.log('isError: ', isError);
+  console.log('isPending: ', isPending);
+  console.log('error : ', error);
 
   return (
     <section className="content-section" id="all-events-section">
