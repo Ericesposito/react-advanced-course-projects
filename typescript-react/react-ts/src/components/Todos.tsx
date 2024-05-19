@@ -1,16 +1,17 @@
-import React, { ReactNode } from 'react';
+import React, { PropsWithChildren } from 'react';
+
+import TodoItem from './TodoItem';
+import Todo from '../models/todo';
 
 type TodosProps = {
-  children?: ReactNode;
-  items: string[];
+  items: Todo[];
 };
 
-const Todos: React.FC<TodosProps> = (props) => {
+const Todos: React.FC<PropsWithChildren<TodosProps>> = (props) => {
   return (
     <ul>
-      {props.children}
       {props.items.map((item) => (
-        <li key={item}>{item}</li>
+        <TodoItem key={item.id} text={item.text} />
       ))}
     </ul>
   );
